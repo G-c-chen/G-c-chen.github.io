@@ -1,6 +1,6 @@
 hexo clean
 hexo g
-#cp -rf new-pearl ./public/
+cp -rf assets ./public/
 hexo d
 git add .
 git commit -m "Backup"
