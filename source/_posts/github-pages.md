@@ -58,6 +58,32 @@ git clone git@github.com:G-c-chen/qptest.git
 
 ![](https://gcchen.cn/assets/images/clone-git-repository.png)
 
+### 生成 ssh 密钥
+
+```shell
+ ssh-keygen -t rsa -C "user.email" # 注册 GitHub 的邮箱地址
+```
+
+> 输入命令第一次回车提示的是输入保存地址，这里默认就好
+> 我这里因为已经生成过一次了，所以会提示是否要覆盖，为了演示，我这里选择覆盖
+> 下面提示设置密码，默认为空，默认就好，下面再次输入密码也是默认就行
+> 然后密钥就生成成功了
+
+![](https://gcchen.cn/assets/images/create-ssh-key.png)
+
+### 在 GitHub 账户添加 SSH key
+
+**复制生成的密钥**
+
+![](https://gcchen.cn/assets/images/read-ssh-key.png)
+![](https://gcchen.cn/assets/images/ssh-key.png)
+
+
+**然后把密钥添加到 GitHub 的 ssh key中 [传送](https://github.com/settings/keys)**
+
+
+
+
 ### 用 Acrobat DC 把 PDF 转为 HTML 格式 (这里随便搞了一个pdf文件演示一下效果)
    
    **选择导出 PDF > 选择 HTML 网页格式** 
