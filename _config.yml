@@ -81,4 +81,4 @@ deploy:
   type: git
   repo: https://github.com/G-c-chen/G-c-chen.github.io
   branch: master
-  message: 'gcchen'
+  message: Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}
