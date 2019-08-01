@@ -56,7 +56,7 @@ categories:
 git clone git@github.com:G-c-chen/qptest.git
 ```
 
-![](../..https://gcchen.cn/assets/images/clone-git-repository.png)
+![](https://gcchen.cn/assets/images/clone-git-repository.png)
 
 ### 用 Acrobat DC 把 PDF 转为 HTML 格式 (这里随便搞了一个pdf文件演示一下效果)
    
