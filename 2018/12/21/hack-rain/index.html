@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="canvas,数字雨,黑客帝国,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="效果如图[外链图片转存失败(img-EcMRhPeu-1564569122403)(http://gcchen.cn/upload/rain.gif)] 加载动图可能需要点时间，可点此处查看效果 背景今天看到一个数字雨的效果，看起来非常炫酷，接着就去网上查了下如何实现的，然后才知道用canvas实现这个效果并不复杂，然后就自己捣鼓了一番，对canvas不了解的可以先去了解一下 具体实现思路先说一下">
+<meta name="keywords" content="canvas,数字雨,黑客帝国">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas之&quot;黑客帝国&quot;数字雨效果">
+<meta property="og:url" content="http://yoursite.com/2018/12/21/hack-rain/index.html">
+<meta property="og:site_name" content="GCCHEN&#39;S BLOG">
+<meta property="og:description" content="效果如图[外链图片转存失败(img-EcMRhPeu-1564569122403)(http://gcchen.cn/upload/rain.gif)] 加载动图可能需要点时间，可点此处查看效果 背景今天看到一个数字雨的效果，看起来非常炫酷，接着就去网上查了下如何实现的，然后才知道用canvas实现这个效果并不复杂，然后就自己捣鼓了一番，对canvas不了解的可以先去了解一下 具体实现思路先说一下">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-04T01:14:25.417Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canvas之&quot;黑客帝国&quot;数字雨效果">
+<meta name="twitter:description" content="效果如图[外链图片转存失败(img-EcMRhPeu-1564569122403)(http://gcchen.cn/upload/rain.gif)] 加载动图可能需要点时间，可点此处查看效果 背景今天看到一个数字雨的效果，看起来非常炫酷，接着就去网上查了下如何实现的，然后才知道用canvas实现这个效果并不复杂，然后就自己捣鼓了一番，对canvas不了解的可以先去了解一下 具体实现思路先说一下">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/21/hack-rain/">
+
+
+
+
+
+  <title>canvas之"黑客帝国"数字雨效果 | GCCHEN'S BLOG</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">GCCHEN'S BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/hack-rain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="gcchen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="GCCHEN'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">canvas之"黑客帝国"数字雨效果</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-21T09:32:17+08:00">
+                2018-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/canvas/" itemprop="url" rel="index">
+                    <span itemprop="name">canvas</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="效果如图"><a href="#效果如图" class="headerlink" title="效果如图"></a>效果如图</h2><p>[外链图片转存失败(img-EcMRhPeu-1564569122403)(<a href="http://gcchen.cn/upload/rain.gif)]" target="_blank" rel="noopener">http://gcchen.cn/upload/rain.gif)]</a></p>
+<p><em>加载动图可能需要点时间，可点此处<a href="https://gcchen.cn/web-demos/canvas-rain/" target="_blank" rel="noopener">查看效果</a></em></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>今天看到一个数字雨的效果，看起来非常炫酷，接着就去网上查了下如何实现的，然后才知道用canvas实现这个效果并不复杂，然后就自己捣鼓了一番，对canvas不了解的可以<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_usage" target="_blank" rel="noopener">先去了解一下</a></p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>先说一下思路再上代码，核心的东西就两点，一是数字落下的 Y 轴坐标随机产生，使得所有数字不在同一水平线上落下，看起来才比齐刷刷落下来效果好看。二是使用定时器，隔一段时间调用绘制数字的方法来绘制数字，并且要绘制的数字的位置不断迭代，才有落下来的效果，此处可以去看一下<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_animations" target="_blank" rel="noopener">canvas的基本动画</a>实现。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>具体代码实现如下，有不同见解的可评论留言进行交流！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取屏幕可视区域大小</span></span><br><span class="line">  <span class="keyword">var</span> d = <span class="built_in">document</span>.documentElement;</span><br><span class="line">  <span class="keyword">var</span> clinetW = d.clientWidth;</span><br><span class="line">  <span class="keyword">var</span> clinetH = d.clientHeight;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//设置画布大小</span></span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">  canvas.width = clinetW;</span><br><span class="line">  canvas.height = clinetH;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> cxt = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">  <span class="keyword">var</span> rainStr = <span class="string">'The matrix of hackers'</span>;</span><br><span class="line">  <span class="keyword">var</span> arr = rainStr.split(<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> fontSize = <span class="number">14</span>;</span><br><span class="line">  <span class="comment">// 计算行数</span></span><br><span class="line">  <span class="keyword">var</span> cols = <span class="built_in">Math</span>.floor(clinetW / fontSize);</span><br><span class="line">  <span class="comment">// 初始化Y轴坐标</span></span><br><span class="line">  <span class="keyword">var</span> down = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cols; i++) &#123;</span><br><span class="line">    down.push(<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">-100</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">drawRain</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 填充背景(ps:背景采用rgba,可尝试不同透明度的效果)</span></span><br><span class="line">    cxt.fillStyle = <span class="string">'rgba(0,0,0,.1)'</span>;</span><br><span class="line">    cxt.fillRect(<span class="number">0</span>, <span class="number">0</span>, clinetW, clinetH);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置字体颜色</span></span><br><span class="line">    cxt.fillStyle = <span class="string">'#00ff00'</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; down.length; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> randomNum = <span class="built_in">Math</span>.random();</span><br><span class="line">      <span class="comment">// 绘制文字</span></span><br><span class="line">      cxt.fillText(arr[<span class="built_in">Math</span>.floor(randomNum * arr.length)], i * fontSize, down[i] * fontSize);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (down[i] * fontSize &gt; clinetH &amp;&amp; randomNum &gt; <span class="number">0.9</span>) &#123;</span><br><span class="line">        down[i] = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//绘制文字的下一个位置</span></span><br><span class="line">      down[i]++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  setInterval(drawRain, <span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="简单封装"><a href="#简单封装" class="headerlink" title="简单封装"></a>简单封装</h3><p><em>把上面的代码封装成一个函数</em> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * [rain description]</span></span><br><span class="line"><span class="comment">   * @param  &#123;[Element]&#125; canvas canvas元素对象</span></span><br><span class="line"><span class="comment">   * @param  &#123;[String]&#125; text    掉落的字符串</span></span><br><span class="line"><span class="comment">   * @param  &#123;[String]&#125; symbol  分隔符</span></span><br><span class="line"><span class="comment">   * @param  &#123;[Number]&#125; speed   掉落速度</span></span><br><span class="line"><span class="comment">   * @return &#123;[type]&#125;        [description]</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">rain</span>(<span class="params">canvas, text, symbol, speed</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//获取屏幕可视区域大小</span></span><br><span class="line">    <span class="keyword">var</span> d = <span class="built_in">document</span>.documentElement;</span><br><span class="line">    <span class="keyword">var</span> clinetW = d.clientWidth;</span><br><span class="line">    <span class="keyword">var</span> clinetH = d.clientHeight;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//设置画布大小</span></span><br><span class="line">    <span class="keyword">var</span> canvas = canvas || <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">    canvas.width = clinetW;</span><br><span class="line">    canvas.height = clinetH;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> cxt = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">    <span class="keyword">var</span> rainStr = text || <span class="string">'The matrix of hackers'</span>;</span><br><span class="line">    <span class="keyword">var</span> symbol = symbol || <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> arr = rainStr.split(symbol);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fontSize = <span class="number">14</span>;</span><br><span class="line">    <span class="comment">// 计算行数</span></span><br><span class="line">    <span class="keyword">var</span> cols = <span class="built_in">Math</span>.floor(clinetW / fontSize);</span><br><span class="line">    <span class="comment">// 初始化Y轴坐标</span></span><br><span class="line">    <span class="keyword">var</span> down = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cols; i++) &#123;</span><br><span class="line">      down.push(<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">-100</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">drawRain</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 填充背景(ps:背景采用rgba,可尝试不同透明度的效果)</span></span><br><span class="line">      cxt.fillStyle = <span class="string">'rgba(0,0,0,.1)'</span>;</span><br><span class="line">      cxt.fillRect(<span class="number">0</span>, <span class="number">0</span>, clinetW, clinetH);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 设置字体颜色</span></span><br><span class="line">      cxt.fillStyle = <span class="string">'#00ff00'</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; down.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> randomNum = <span class="built_in">Math</span>.random();</span><br><span class="line">        <span class="comment">// 绘制文字</span></span><br><span class="line">        cxt.fillText(arr[<span class="built_in">Math</span>.floor(randomNum * arr.length)], i * fontSize, down[i] * fontSize);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (down[i] * fontSize &gt; clinetH &amp;&amp; randomNum &gt; <span class="number">0.9</span>) &#123;</span><br><span class="line">          down[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        down[i]++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> speed = speed || <span class="number">30</span>;</span><br><span class="line">    setInterval(drawRain, speed);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">var</span> text = <span class="string">'富强 民主 文明 和谐 自由 平等 公正 法治 爱国 敬业 诚信 友善'</span>;</span><br><span class="line">  rain(canvas, text, <span class="string">''</span>, <span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>完整的代码请移驾到我的<a href="https://github.com/G-c-chen/web-demos/blob/master/canvas-rain/index.html" target="_blank" rel="noopener">github</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/canvas/" rel="tag"># canvas</a>
+          
+            <a href="/tags/数字雨/" rel="tag"># 数字雨</a>
+          
+            <a href="/tags/黑客帝国/" rel="tag"># 黑客帝国</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/30/github-pages/" rel="prev" title="PDF文件转换为html在线可访问资源">
+                PDF文件转换为html在线可访问资源 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">gcchen</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#效果如图"><span class="nav-number">1.</span> <span class="nav-text">效果如图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体实现"><span class="nav-number">3.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">3.2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单封装"><span class="nav-number">3.3.</span> <span class="nav-text">简单封装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gcchen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
