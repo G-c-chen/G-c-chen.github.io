@@ -13,11 +13,11 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://gcchen.cn
 root: /
-permalink: :year/:month/:day/:title/
+permalink: :year/:month/:day/:urlName/
 permalink_defaults:
-
+  urlName: index
 # Directory
 source_dir: source
 public_dir: public
