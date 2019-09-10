@@ -13,7 +13,7 @@ urlName: python_class2
 ## 本节知识
 
 * 学会看和分析 HTML 代码结构
-* python 列表和循环
+* python 列表、字典和循环
 * 学习 python 对象和方法
 * BeautifulSoup 的 find 和 find_all 方法的使用
 
@@ -40,7 +40,7 @@ urlName: python_class2
     1、 `<div>我是社会主义的接班人</div>` 其中 `我是社会主义的接班人` 就是 div 标签的内容
     2、 `<div>我是<span>社会主义</span>的接班人</div>` 其中 `我是<span>社会主义</span>的接班人` 是 div 标签的内容而 `社会主义` 是 span 标签的内容
   
-## python 的列表和循环
+## python 列表、字典和循环
 
 
 ## python 的对象和方法
