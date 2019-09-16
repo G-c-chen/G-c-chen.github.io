@@ -1,15 +1,14 @@
 ---
 title: python爬虫二 爬取豆瓣Top250上
-categories:
-  - python爬虫
-tags:
-  - python
-  - python爬虫
-  - 豆瓣Top250
+date: {{ date }}
+categories: 
+- python爬虫
+tags: 
+- python
+- python爬虫
+- 豆瓣Top250
 urlName: python_class2
-date: 2019-09-16 00:00:00
 ---
-
 
 ## 本节知识
 
@@ -77,6 +76,15 @@ list.append(1996)
 print(list)
 # 输出 ['physics', 'chemistry', 1997, 2000, 1996]
 ```
+
+<!-- 6、使用 del 语句来删除列表的元素
+
+```python
+list = ['physics', 'chemistry', 1997, 2000]
+del list[0]
+print(list)
+# 输出 ['chemistry', 1997, 2000]
+``` -->
 
 ### 字典
 
@@ -189,7 +197,7 @@ print(soup.prettify())
 
 ### find_all( name , attrs , recursive , string , **kwargs )
 
-*本节内容提及到但是没有加以说明的知识点，皆因本节内容只需用到加以说明的知识，没有加以说明以后用到再进行补充，[或者有兴趣的可以自己进行学习](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/#id4)，以补充相关知识*
+*本节内容提及到但是没有加以说明的知识点，皆因本节内容只需用到加以说明的知识，没有加以说明以后用到再进行补充，或者有兴趣的可以自己进行[学习](https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/#id4)，以补充相关知识*
 
 find_all() 方法搜索当前tag的所有tag子节点,并判断是否符合过滤器的条件
 
