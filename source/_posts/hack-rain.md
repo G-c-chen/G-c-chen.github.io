@@ -13,7 +13,7 @@ categories:
 
 [外链图片转存失败(img-EcMRhPeu-1564569122403)(http://gcchen.cn/upload/rain.gif)]
 
-*加载动图可能需要点时间，可点此处[查看效果](https://gcchen.cn/web-demos/canvas-rain/)*
+*加载动图可能需要点时间，可点此处[查看效果](https://gcchen.cn/web-demos/canvas-rain/index.html)*
 
 ## 背景
 
