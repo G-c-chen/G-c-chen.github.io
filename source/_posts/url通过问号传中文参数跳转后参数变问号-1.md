@@ -1,9 +1,12 @@
 ---
-title: url通过问号传中文参数变跳转后参数变问号?
+title: url通过问号传中文参数跳转后参数变问号?
 categories:
   - url
 tags:
   - url
+  - 微信
+  - 乱码
+  - 字符编码
 urlName: url-encode
 date: 2019-10-12 14:43:12
 ---
