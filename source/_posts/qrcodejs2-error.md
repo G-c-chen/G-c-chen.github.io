@@ -1,16 +1,17 @@
 ---
-title: 使用 qrcodejs2 生成二维码报 'Error:code length overflow.' 错误
-date: 2019-10-14 11:21:07
+title: '使用 qrcodejs2 生成二维码报 ''Error:code length overflow.'' 错误'
 categories:
-- 插件
+  - 插件
 tags:
-- qrcodejs 
-- qrcodejs2
-- 报错
-- code length overflow
-- 代码长度溢出
+  - qrcodejs
+  - qrcodejs2
+  - 报错
+  - code length overflow
+  - 代码长度溢出
 urlName: qrcodejs2-error
+date: 2019-10-14 11:21:07
 ---
+
 
 ## 问题描述
 
