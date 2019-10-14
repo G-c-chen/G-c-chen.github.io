@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://gcchen.cn/2019/10/14/qrcodejs2-error/Unofficial.png">
 <meta property="og:image" content="http://gcchen.cn/2019/10/14/qrcodejs2-error/Official.png">
 <meta property="og:image" content="http://gcchen.cn/2019/10/14/qrcodejs2-error/qrcodejs-options.png">
-<meta property="og:updated_time" content="2019-10-14T06:19:04.959Z">
+<meta property="og:updated_time" content="2019-10-14T06:21:06.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 qrcodejs2 生成二维码报 &#39;Error:code length overflow.&#39; 错误">
 <meta name="twitter:description" content="问题描述使用 qrcodejs2 插件生成二维码，按照平时的操作，二维码应该是乖乖显示出来的，但是它这次不想出来，还向我丢了个错误    产生原因看了报错信息很显然是说代码长度溢出,原来是这次传的url参数过长了 解决方案1、缩短url长度  把url中的参数改为简写缩写，尽量缩短url的长度（但是这种方法不能彻底解决这个问题，说不定以后会有在url后面拼接很多参数的需求，所以这种方式并不建议使用">
@@ -368,7 +368,7 @@
 </ul>
 <p>2、设置correctLevel参数，参数可选值有以下几种!</p>
 <ul>
-<li><p>因为第一种方法行不通，继续找别的解决办法，查询了很多相关的资料，这个插件使用的教程倒是很多，看了一下跟我自己的配置的参数都一样，也没有相关的参数说明，然后通过npm模块找到了qrcodejs的代码仓库，看看有什么不一样</p>
+<li><p>因为第一种方法行不通，继续找别的解决办法，查询了很多相关的资料，这个插件使用的教程倒是很多，看了一下跟我自己的配置的参数都一样，也没有相关的参数说明，然后通过npm模块找到了<a href="https://github.com/davidshimjs/qrcodejs" target="_blank" rel="noopener">qrcodejs的代码仓库</a>，看看有什么不一样</p>
 <p>相关教程代表：</p>
 <img src="/2019/10/14/qrcodejs2-error/Unofficial.png" title="相关教程代表示例">
 
