@@ -25,12 +25,12 @@ date: 2019-10-16 14:25:15
 
 *关键路由代码*
 ```js
-  {
-      path: '/tcReport/:orderType/:type',
-      component: () => import('@/views/tc/tcReport/tcReportList'),
-      name: 'tcReportList',
-      meta: { title: '汇总报表', icon: 'guide', noCache: false }
-    }
+{
+  path: '/tcReport/:orderType/:type',
+  component: () => import('@/views/tc/tcReport/tcReportList'),
+  name: 'tcReportList',
+  meta: { title: '汇总报表', icon: 'guide', noCache: false }
+}
 ```
 
 
