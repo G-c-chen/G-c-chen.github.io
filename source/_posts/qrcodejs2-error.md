@@ -18,7 +18,6 @@ date: 2019-10-14 11:21:07
 使用 qrcodejs2 插件生成二维码，按照平时的操作，二维码应该是乖乖显示出来的，但是它这次不想出来，还向我丢了个错误
 
 {% asset_img error-msg.png %}
-<!-- ![](./qrcodejs2-error/error-msg.png) -->
 
 ## 产生原因
 
