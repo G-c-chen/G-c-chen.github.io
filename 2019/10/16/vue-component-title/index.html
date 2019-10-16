@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://gcchen.cn/2019/10/16/vue-component-title/vue-component1.png">
 <meta property="og:image" content="http://gcchen.cn/2019/10/16/vue-component-title/vue-component2.png">
-<meta property="og:updated_time" content="2019-10-16T07:09:56.611Z">
+<meta property="og:updated_time" content="2019-10-16T07:11:46.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="element-admin中动态改变复用组件的title">
 <meta name="twitter:description" content="背景最近接到一个任务是做几个汇总报表的前端界面,看了一下原型,结构都差不多,所以就写成了一个组件,根据不同的汇总报表,传不同的参数来区分,任务并不复杂,然后刷刷的很快就完成了,但是事情并没有结束! 问题描述很快问题就暴露出来了,就是所有的汇总报表的title都是用的同一个组件的组件的,所以所有的汇总报表的名称都是一样的,无法区分是哪个汇总报表,效果是这样的   关键路由代码 123456&amp;#123">
@@ -360,7 +360,7 @@
 <img src="/2019/10/16/vue-component-title/vue-component1.png" title="多个汇总报表名称相同(无法区分)">
 
 <p><em>关键路由代码</em></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">'/tcReport/:orderType/:type'</span>,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/tc/tcReport/tcReportList'</span>),</span><br><span class="line">    name: <span class="string">'tcReportList'</span>,</span><br><span class="line">    meta: &#123; <span class="attr">title</span>: <span class="string">'汇总报表'</span>, <span class="attr">icon</span>: <span class="string">'guide'</span>, <span class="attr">noCache</span>: <span class="literal">false</span> &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/tcReport/:orderType/:type'</span>,</span><br><span class="line">  component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/tc/tcReport/tcReportList'</span>),</span><br><span class="line">  name: <span class="string">'tcReportList'</span>,</span><br><span class="line">  meta: &#123; <span class="attr">title</span>: <span class="string">'汇总报表'</span>, <span class="attr">icon</span>: <span class="string">'guide'</span>, <span class="attr">noCache</span>: <span class="literal">false</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这可咋办啊,咱得解决这个问题啊</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><blockquote>
