@@ -9,11 +9,12 @@ categories:
 - canvas
 ---
 
-## 效果如图
+{% asset_img rain.png %}
+<!-- more -->
 
-[外链图片转存失败(img-EcMRhPeu-1564569122403)(http://gcchen.cn/upload/rain.gif)]
+## 动态效果
 
-*加载动图可能需要点时间，可点此处[查看效果](https://gcchen.cn/web-demos/canvas-rain/index.html)*
+*点击此处[查看效果](https://gcchen.cn/web-demos/canvas-rain/index.html)*
 
 ## 背景
 
@@ -143,4 +144,4 @@ categories:
 
 ## 最后
 
-完整的代码请移驾到我的[github](https://github.com/G-c-chen/web-demos/blob/master/canvas-rain/index.html)
+完整的代码请查看我的[github](https://github.com/G-c-chen/web-demos/blob/master/canvas-rain/index.html)
