@@ -1,0 +1,40 @@
+# TODO LIST
+
+## 科普
+
+### vue 对象改变触发data监听的形式
+
+
+## 爬坑
+
+### cube-ui date-picker中两个选择器两个时间数组变量分别继承回调参数中的date，两个数组指向同一个对象？
+
+### 解决 Module build failed: Error: No PostCSS Config found in...报错
+
+- newpearl-lib\postcss.config.js
+
+### 解决The "path" argument must be of type string. Received type object 报错
+
+- newpearl-lib\build\utils.js
+
+### ios input type=number 无法控制输入类型
+
+### 字体影响导致内容超出没自动换行
+
+### execCommand(‘Paste’) 不生效
+
+- newpearl-lib\packages\right-operation\np-right-operation.vue
+
+### ios input 失焦页面不回弹
+
+- o2o-mobile\src\views\personal\components\form-item.vue
+
+## 组件
+
+### 基于cube-ui改造的时间选择器，带周选择，时间范围选择
+
+## 记录
+
+### js复制html内容
+
+o2o-mobile\src\views\iOrder\iOrderBillCreate.vue
