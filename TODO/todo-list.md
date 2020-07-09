@@ -20,6 +20,11 @@
 ### ios input type=number 无法控制输入类型
 
 ### 字体影响导致内容超出没自动换行
+white-space: normal;
+
+display: -webkit-box !important;
+内容超出显示三点
+
 
 ### execCommand(‘Paste’) 不生效
 
