@@ -1,37 +1,197 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>基于 Ubuntu 搭建 Hexo 个人博客 | GCCHEN'S BLOG</title><meta name="author" content="gcchen"><meta name="copyright" content="gcchen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景 相比 wordpress，我更喜欢 Hexo 的简洁 ，然后就去找教程了，然后发现一些教程照着去做会报一些错误，可能因为环境差异的原因，然后综合了多个教程和各种网上扒报错终于把 Hexo 搭好了，然后整理了一下贴出来，希望能给想要搭建 Hexo 个人博客的大家一个参考，想先看看效果，欢迎访问我的Hexo 博客  一、准备环境1、安装 Git  1sudo apt install git-co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 Ubuntu 搭建 Hexo 个人博客">
+<meta property="og:url" content="http://gcchen.cn/2019/07/31/index/index.html">
+<meta property="og:site_name" content="GCCHEN&#39;S BLOG">
+<meta property="og:description" content="背景 相比 wordpress，我更喜欢 Hexo 的简洁 ，然后就去找教程了，然后发现一些教程照着去做会报一些错误，可能因为环境差异的原因，然后综合了多个教程和各种网上扒报错终于把 Hexo 搭好了，然后整理了一下贴出来，希望能给想要搭建 Hexo 个人博客的大家一个参考，想先看看效果，欢迎访问我的Hexo 博客  一、准备环境1、安装 Git  1sudo apt install git-co">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2019-07-31T11:52:31.000Z">
+<meta property="article:modified_time" content="2021-10-10T05:55:05.244Z">
+<meta property="article:author" content="gcchen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://gcchen.cn/2019/07/31/index/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '基于 Ubuntu 搭建 Hexo 个人博客',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-10 13:55:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-{% block page_class %}page-post-detail{% endblock %}
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">32</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">GCCHEN'S BLOG</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">基于 Ubuntu 搭建 Hexo 个人博客</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-07-31T11:52:31.000Z" title="Created 2019-07-31 19:52:31">2019-07-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-10-10T05:55:05.244Z" title="Updated 2021-10-10 13:55:05">2021-10-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="基于 Ubuntu 搭建 Hexo 个人博客"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><blockquote>
+<p>相比 wordpress，我更喜欢 Hexo 的简洁 ，然后就去找教程了，然后发现一些教程照着去做会报一些错误，可能因为环境差异的原因，然后综合了多个教程和各种网上扒报错终于把 Hexo 搭好了，然后整理了一下贴出来，希望能给想要搭建 Hexo 个人博客的大家一个参考，想先看看效果，欢迎访问我的<a href="https://gcchen.cn/">Hexo 博客</a></p>
+</blockquote>
+<h2 id="一、准备环境"><a href="#一、准备环境" class="headerlink" title="一、准备环境"></a>一、准备环境</h2><h3 id="1、安装-Git"><a href="#1、安装-Git" class="headerlink" title="1、安装 Git"></a>1、安装 Git</h3>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git-core -y</span><br></pre></td></tr></table></figure>
+<h3 id="2、安装Node-js"><a href="#2、安装Node-js" class="headerlink" title="2、安装Node.js"></a>2、安装Node.js</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh</span><br><span class="line">source ~/.profile</span><br><span class="line">nvm install stable</span><br></pre></td></tr></table></figure>
 
-{% block content %}
+<h2 id="二、安装-Hexo"><a href="#二、安装-Hexo" class="headerlink" title="二、安装 Hexo"></a>二、安装 Hexo</h2><h3 id="1、安装-cnpm"><a href="#1、安装-cnpm" class="headerlink" title="1、安装 cnpm"></a>1、安装 cnpm</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<h3 id="2、安装-Hexo"><a href="#2、安装-Hexo" class="headerlink" title="2、安装 Hexo"></a>2、安装 Hexo</h3><p><em>先创建一个文件夹，然后进入到文件夹开始安装</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir hexo</span><br><span class="line">cd hexo/</span><br><span class="line">cnpm install -g hexo-cli</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<h3 id="3、测试安装成功"><a href="#3、测试安装成功" class="headerlink" title="3、测试安装成功"></a>3、测试安装成功</h3><p> <em>打开 Hexo 服务</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
-    </div>
-  </div>
+<blockquote>
+<p>此时打开浏览器访问自己【主机的ip：4000】就可以看到我们搭建成功的博客页面。<br>但是这仅仅是本地的，接下来把博客部署到 GitHub 上面我们就可以脱离本地访问了。</p>
+</blockquote>
+<h2 id="三、-将博客部署到-GitHub"><a href="#三、-将博客部署到-GitHub" class="headerlink" title="三、 将博客部署到 GitHub"></a>三、 将博客部署到 GitHub</h2><h3 id="1、注册-GitHub"><a href="#1、注册-GitHub" class="headerlink" title="1、注册 GitHub"></a>1、注册 GitHub</h3><p>*如果没有GitHub账户的先去去注册<a href="%5Bhttps://github.com/">GitHub账户</a>，有GitHub账户的直接下一步;</p></p>
+<h3 id="2、设置-user-name-和-user-email"><a href="#2、设置-user-name-和-user-email" class="headerlink" title="2、设置 user.name 和 user.email"></a>2、设置 user.name 和 user.email</h3><p><em>注册好之后回来自己的机器上</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Your user.name&quot;</span><br><span class="line">git config --global user.email &quot;You user.email&quot;</span><br></pre></td></tr></table></figure>
+<p><em>“”里面换成自己的user.name和user.email</em></p>
+<h3 id="3、生成-shh-密匙"><a href="#3、生成-shh-密匙" class="headerlink" title="3、生成 shh 密匙"></a>3、生成 shh 密匙</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C user.email</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>下面提示输入要保存到的路径，我们输入  /home/ubuntu/.ssh/id_rsa<br>然后下面直接回车回车；</p>
+</blockquote>
+<h3 id="4、查看-shh-密匙"><a href="#4、查看-shh-密匙" class="headerlink" title="4、查看 shh 密匙"></a>4、查看 shh 密匙</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /home/ubuntu/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+<p><em>把密匙复制一下，接下来去 GitHub 账户下添加 SSH ke</em></p>
+<h3 id="5、在-GitHub-账户添加-SSH-key"><a href="#5、在-GitHub-账户添加-SSH-key" class="headerlink" title="5、在 GitHub 账户添加 SSH key"></a>5、在 GitHub 账户添加 SSH key</h3><p>*添加 ssh key ，<a target="_blank" rel="noopener" href="https://github.com/settings/keys">点击传送</a></p>
+<h3 id="6、创建-GitHub-仓库"><a href="#6、创建-GitHub-仓库" class="headerlink" title="6、创建 GitHub 仓库"></a>6、创建 GitHub 仓库</h2></h3><blockquote>
+<p>命名格式为”账户的userName”.github.io<br>例如 ： zhangsan.github.io<br>去创建GitHub仓库<a target="_blank" rel="noopener" href="https://github.com/new">点击传送</a></p>
+</blockquote>
+<h3 id="7、修改-hexo-配置文件"><a href="#7、修改-hexo-配置文件" class="headerlink" title="7、修改 hexo 配置文件"></a>7、修改 hexo 配置文件</h2></h3><blockquote>
+<p>进入到自己的hexo 安装目录下 ，打开_config.yml文件<br>修改下面这部分；</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">    repo: git@github.com:(BoView)/(BoView).github.io.git #括号里面换成自己的用户名和仓库名,去掉括号</span><br><span class="line">    branch: master</span><br></pre></td></tr></table></figure>
 
-{% endblock %}
+<h3 id="8、部署"><a href="#8、部署" class="headerlink" title="8、部署"></a>8、部署</h3><p><em>安装 hexo-deployer-git 插件</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p><em>部署</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">生成静态页面</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="meta">#</span><span class="bash">将public文件内容部署到github仓库</span></span><br><span class="line">hexo d</span><br><span class="line"><span class="meta">#</span><span class="bash">这两条是常用的命令，后者也可以这样</span></span><br><span class="line">hexo d -g</span><br><span class="line"><span class="meta">#</span><span class="bash">或者</span></span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时可以打开浏览器访问userName.github.io(GitHub仓库名)<br>即可以访问到搭建的博客页面</p><br>到这里基本完成任务了，但是我们想更完美一点，再绑定个域名，然后用域名访问岂不美哉；</p>
+</blockquote>
+<h2 id="四、绑定域名"><a href="#四、绑定域名" class="headerlink" title="四、绑定域名"></a>四、绑定域名</h2><h3 id="1、添加解析记录"><a href="#1、添加解析记录" class="headerlink" title="1、添加解析记录"></a>1、添加解析记录</h3><blockquote>
+<p>去自己的域名下<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/domain/mydomain">添加解析</a>(这里以腾讯云为例)<br>记录类型为 CNAME 主机记录为@ 线路选择默认，TTL选择600，记录值为github的仓库 userName.github.io</p>
+</blockquote>
+<h3 id="2、配置-hexo"><a href="#2、配置-hexo" class="headerlink" title="2、配置 hexo"></a>2、配置 hexo</h3><p><em>创建CNAME配置文件</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch ~/hexo/source/CNAME</span><br></pre></td></tr></table></figure>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
-
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<blockquote>
+<p>下面在CNAME配置文件里面添加刚才解析的域名<br>例如： zhangsan.com<br>然后重新部署一下，<br>ok，ok，恭喜大家<br>此时打开浏览器访问自己的域名即可以访问自己搭建的博客</p><br>开启自己的<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/index.html">【博客之旅】吧</a></p>
+</blockquote>
+<h2 id="五、最后"><a href="#五、最后" class="headerlink" title="五、最后"></a>五、最后</h2><p><strong>大家要是遇到什么问题欢迎贴出来大家一起来讨论，要是哪里写的不够清楚或者有不对的地方，欢迎补充！！！</strong><br>**欢迎大家访问我的<a href="https://gcchen.cn/">Hexo 博客</a>，看看最终的效果。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">gcchen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://gcchen.cn/2019/07/31/index/">http://gcchen.cn/2019/07/31/index/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/09/16/python_class2/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">python爬虫二 爬取豆瓣Top250上</div></div></a></div><div class="next-post pull-right"><a href="/2019/07/30/index/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">PDF文件转换为html在线可访问资源</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">gcchen</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">32</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">一、准备环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85-Git"><span class="toc-number">2.1.</span> <span class="toc-text">1、安装 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85Node-js"><span class="toc-number">2.2.</span> <span class="toc-text">2、安装Node.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85-Hexo"><span class="toc-number">3.</span> <span class="toc-text">二、安装 Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85-cnpm"><span class="toc-number">3.1.</span> <span class="toc-text">1、安装 cnpm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85-Hexo"><span class="toc-number">3.2.</span> <span class="toc-text">2、安装 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E6%B5%8B%E8%AF%95%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="toc-number">3.3.</span> <span class="toc-text">3、测试安装成功</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E5%B0%86%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0-GitHub"><span class="toc-number">4.</span> <span class="toc-text">三、 将博客部署到 GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%B3%A8%E5%86%8C-GitHub"><span class="toc-number">4.1.</span> <span class="toc-text">1、注册 GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E8%AE%BE%E7%BD%AE-user-name-%E5%92%8C-user-email"><span class="toc-number">4.2.</span> <span class="toc-text">2、设置 user.name 和 user.email</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E7%94%9F%E6%88%90-shh-%E5%AF%86%E5%8C%99"><span class="toc-number">4.3.</span> <span class="toc-text">3、生成 shh 密匙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E6%9F%A5%E7%9C%8B-shh-%E5%AF%86%E5%8C%99"><span class="toc-number">4.4.</span> <span class="toc-text">4、查看 shh 密匙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E5%9C%A8-GitHub-%E8%B4%A6%E6%88%B7%E6%B7%BB%E5%8A%A0-SSH-key"><span class="toc-number">4.5.</span> <span class="toc-text">5、在 GitHub 账户添加 SSH key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E5%88%9B%E5%BB%BA-GitHub-%E4%BB%93%E5%BA%93"><span class="toc-number">4.6.</span> <span class="toc-text">6、创建 GitHub 仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E4%BF%AE%E6%94%B9-hexo-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">4.7.</span> <span class="toc-text">7、修改 hexo 配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81%E9%83%A8%E7%BD%B2"><span class="toc-number">4.8.</span> <span class="toc-text">8、部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D"><span class="toc-number">5.</span> <span class="toc-text">四、绑定域名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%B7%BB%E5%8A%A0%E8%A7%A3%E6%9E%90%E8%AE%B0%E5%BD%95"><span class="toc-number">5.1.</span> <span class="toc-text">1、添加解析记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE-hexo"><span class="toc-number">5.2.</span> <span class="toc-text">2、配置 hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%9C%80%E5%90%8E"><span class="toc-number">6.</span> <span class="toc-text">五、最后</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/10/10/miniprogram-web-view/" title="本地调试小程序内嵌 web-view"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="本地调试小程序内嵌 web-view"/></a><div class="content"><a class="title" href="/2021/10/10/miniprogram-web-view/" title="本地调试小程序内嵌 web-view">本地调试小程序内嵌 web-view</a><time datetime="2021-10-10T08:46:50.000Z" title="Created 2021-10-10 16:46:50">2021-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/04/28/wecaht-jssdk-signature-error/" title="小程序web-view嵌入的h5调用JS-SDK，报签名错误？"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="小程序web-view嵌入的h5调用JS-SDK，报签名错误？"/></a><div class="content"><a class="title" href="/2020/04/28/wecaht-jssdk-signature-error/" title="小程序web-view嵌入的h5调用JS-SDK，报签名错误？">小程序web-view嵌入的h5调用JS-SDK，报签名错误？</a><time datetime="2020-04-28T10:47:51.000Z" title="Created 2020-04-28 18:47:51">2020-04-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/10/29/upload-files/" title="vue + axios 实现文件上传"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue + axios 实现文件上传"/></a><div class="content"><a class="title" href="/2019/10/29/upload-files/" title="vue + axios 实现文件上传">vue + axios 实现文件上传</a><time datetime="2019-10-29T02:52:23.000Z" title="Created 2019-10-29 10:52:23">2019-10-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/10/16/vue-component-title/" title="element-admin中动态改变复用组件的title"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="element-admin中动态改变复用组件的title"/></a><div class="content"><a class="title" href="/2019/10/16/vue-component-title/" title="element-admin中动态改变复用组件的title">element-admin中动态改变复用组件的title</a><time datetime="2019-10-16T06:25:15.000Z" title="Created 2019-10-16 14:25:15">2019-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/10/14/qrcodejs2-error/" title="使用 qrcodejs2 生成二维码报 'Error:code length overflow.' 错误"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用 qrcodejs2 生成二维码报 'Error:code length overflow.' 错误"/></a><div class="content"><a class="title" href="/2019/10/14/qrcodejs2-error/" title="使用 qrcodejs2 生成二维码报 'Error:code length overflow.' 错误">使用 qrcodejs2 生成二维码报 'Error:code length overflow.' 错误</a><time datetime="2019-10-14T03:21:07.000Z" title="Created 2019-10-14 11:21:07">2019-10-14</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By gcchen</div><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备18051422号</a><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
