@@ -6,6 +6,8 @@
     "version": "5.4.0"
   },
   "dependencies": {
+    "add": "^2.0.6",
+    "cheerio": "^0.22.0",
     "hexo": "^5.4.0",
     "hexo-deployer-git": "^3.0.0",
     "hexo-generator-archive": "^0.1.5",
@@ -15,7 +17,10 @@
     "hexo-migrator-rss": "^1.1.0",
     "hexo-renderer-ejs": "^0.3.1",
     "hexo-renderer-marked": "^4.1.0",
-    "hexo-renderer-stylus": "^0.3.3"
+    "hexo-renderer-pug": "^2.0.0",
+    "hexo-renderer-stylus": "^0.3.3",
+    "or": "^0.2.0",
+    "yarn": "^1.22.15"
   },
   "devDependencies": {
     "hexo-server": "^0.3.3"

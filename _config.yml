@@ -73,12 +73,12 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: Butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/G-c-chen/G-c-chen.github.io
+  repo: https://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@github.com/G-c-chen/G-c-chen.github.io
   branch: master
   message: Site updated {{ now('YYYY-MM-DD HH:mm:ss') }}
