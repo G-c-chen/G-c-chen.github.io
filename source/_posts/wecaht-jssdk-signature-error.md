@@ -1,6 +1,7 @@
 ---
 title: 小程序web-view嵌入的h5调用JS-SDK，报签名错误？
 date: 2020-04-28 18:47:51
+cover: miniprogram_img_2.jpeg
 categories:
 - 小程序
 tags:

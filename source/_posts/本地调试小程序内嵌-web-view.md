@@ -1,6 +1,7 @@
 ---
 title: 本地调试小程序内嵌 web-view
 date: 2021-10-10 16:46:50
+cover: miniprogram_img_2.jpeg
 categories: 
 - 小程序
 tags:
@@ -23,6 +24,7 @@ urlName: miniprogram-web-view
 **vue-cli3.x 项目**
 在项目根目录下的vue.config.js文件中增加属性 https: true 即可
 
+```js
 // vue.config.js
 module.exports = {
   devServer: {
@@ -39,6 +41,7 @@ module.exports = {
     https: true
   }
 }
+```
 vue.config.js 配置参考文档：[https://cli.vuejs.org/zh/config/#vue-config-js](https://cli.vuejs.org/zh/config/#vue-config-js)
 
 **vue-cli2.x 项目**
@@ -59,8 +62,8 @@ openssl x509 -req -days 3650 -in csr.key -signkey private.key -out file.crt
 完成上述步骤后，cert目录下分别生成 private.key、csr.key、file.crt 三个文件。
 
 ### 修改项目中配置
-打开app.js增加以下代码：（若相关配置写在./build/dev-server.js中则在对应文件中修改
-
+打开app.js增加以下代码：（若相关配置写在./build/dev-server.js中则在对应文件中修改)
+```js
 const opn = require('opn')
 const path = require('path') 
 const express = require('express')
@@ -78,6 +81,7 @@ let server = https.createServer(credentials, app)
 // ...
 // app.listen(port) // 开启http
 server.listen(port) // 开启https
+```
 2.修改本地hosts文件（win）
 hosts 文件路径： C:\Windows\System32\drivers\etc\hosts
 

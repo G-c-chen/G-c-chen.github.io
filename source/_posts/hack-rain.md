@@ -1,6 +1,7 @@
 ---
 title: canvas之"黑客帝国"数字雨效果
 date: 2018-12-21 09:32:17
+cover: rain.png
 tags: 
 - canvas
 - 数字雨
