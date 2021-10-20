@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>IOS 15使用html2canvas生成图片失败 | GCCHEN'S BLOG</title><meta name="keywords" content="IOS 15,html2canvas"><meta name="author" content="gcchen"><meta name="copyright" content="gcchen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="产生前端使用 html2canvas 把 dom 元素转化为 canvas 时, 在IOS 15上没有按照预期生成图片，在其他手机上可以正常运行生成图片。 问题定位经过调试发现，在另外一个页面在IOS 15上调用 html2canvas 可以正常执行，但是在这个页面上就没有执行 html2canvas 函数， 不同的是，正常执行的页面的dom元素都是图片，没有执行的页面上的dom上面有文字，所以应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IOS 15使用html2canvas生成图片失败">
+<meta property="og:url" content="http://gcchen.cn/2021/10/20/IOS%2015-html2canvas-bugfix/index.html">
+<meta property="og:site_name" content="GCCHEN&#39;S BLOG">
+<meta property="og:description" content="产生前端使用 html2canvas 把 dom 元素转化为 canvas 时, 在IOS 15上没有按照预期生成图片，在其他手机上可以正常运行生成图片。 问题定位经过调试发现，在另外一个页面在IOS 15上调用 html2canvas 可以正常执行，但是在这个页面上就没有执行 html2canvas 函数， 不同的是，正常执行的页面的dom元素都是图片，没有执行的页面上的dom上面有文字，所以应">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-10-20T13:18:05.000Z">
+<meta property="article:modified_time" content="2021-10-20T13:18:10.735Z">
+<meta property="article:author" content="gcchen">
+<meta property="article:tag" content="IOS 15">
+<meta property="article:tag" content="html2canvas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://gcchen.cn/2021/10/20/IOS%2015-html2canvas-bugfix/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'IOS 15使用html2canvas生成图片失败',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-20 21:18:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">34</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">GCCHEN'S BLOG</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">IOS 15使用html2canvas生成图片失败</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-10-20T13:18:05.000Z" title="Created 2021-10-20 21:18:05">2021-10-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-10-20T13:18:10.735Z" title="Updated 2021-10-20 21:18:10">2021-10-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/bugfix/">bugfix</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="产生"><a href="#产生" class="headerlink" title="产生"></a>产生</h2><p>前端使用 <code>html2canvas</code> 把 <code>dom</code> 元素转化为 <code>canvas</code> 时, 在IOS 15上没有按照预期生成图片，在其他手机上可以正常运行生成图片。</p>
+<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><p>经过调试发现，在另外一个页面在IOS 15上调用 <code>html2canvas</code> 可以正常执行，但是在这个页面上就没有执行 <code>html2canvas</code> 函数， 不同的是，正常执行的页面的dom元素都是图片，没有执行的页面上的dom上面有文字，所以应该是文字元素影响了 <code>html2canvas</code> 的执行。然后把这个页面的文字元素去掉了，就真的可以正常执行了，更加确定了是文字元素影响的。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>经过查找资料发现是 IOS 15 系统字体导致的bug，上面也给出了响应的解决办法：在根结点中设置 “font family”</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#app</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: Helvetica, Tahoma, Arial, <span class="string">&#x27;PingFang SC&#x27;</span>, <span class="string">&#x27;Hiragino Sans GB&#x27;</span>, <span class="string">&#x27;Heiti SC&#x27;</span>, STXihei, <span class="string">&#x27;Microsoft YaHei&#x27;</span>,SimHei;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以正常生成图片了。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">gcchen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://gcchen.cn/2021/10/20/IOS%2015-html2canvas-bugfix/">http://gcchen.cn/2021/10/20/IOS%2015-html2canvas-bugfix/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IOS-15/">IOS 15</a><a class="post-meta__tags" href="/tags/html2canvas/">html2canvas</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/10/10/miniprogram-web-view/"><img class="next-cover" src="/2021/10/10/miniprogram-web-view/miniprogram_img_2.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">本地调试小程序内嵌 web-view</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">gcchen</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">34</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">9</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A7%E7%94%9F"><span class="toc-number">1.</span> <span class="toc-text">产生</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D"><span class="toc-number">2.</span> <span class="toc-text">问题定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-number">3.</span> <span class="toc-text">解决</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/10/20/IOS%2015-html2canvas-bugfix/" title="IOS 15使用html2canvas生成图片失败"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IOS 15使用html2canvas生成图片失败"/></a><div class="content"><a class="title" href="/2021/10/20/IOS%2015-html2canvas-bugfix/" title="IOS 15使用html2canvas生成图片失败">IOS 15使用html2canvas生成图片失败</a><time datetime="2021-10-20T13:18:05.000Z" title="Created 2021-10-20 21:18:05">2021-10-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/10/10/miniprogram-web-view/" title="本地调试小程序内嵌 web-view"><img src="/2021/10/10/miniprogram-web-view/miniprogram_img_2.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="本地调试小程序内嵌 web-view"/></a><div class="content"><a class="title" href="/2021/10/10/miniprogram-web-view/" title="本地调试小程序内嵌 web-view">本地调试小程序内嵌 web-view</a><time datetime="2021-10-10T08:46:50.000Z" title="Created 2021-10-10 16:46:50">2021-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/04/28/wecaht-jssdk-signature-error/" title="小程序web-view嵌入的h5调用JS-SDK，报签名错误？"><img src="/2020/04/28/wecaht-jssdk-signature-error/miniprogram_img_2.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="小程序web-view嵌入的h5调用JS-SDK，报签名错误？"/></a><div class="content"><a class="title" href="/2020/04/28/wecaht-jssdk-signature-error/" title="小程序web-view嵌入的h5调用JS-SDK，报签名错误？">小程序web-view嵌入的h5调用JS-SDK，报签名错误？</a><time datetime="2020-04-28T10:47:51.000Z" title="Created 2020-04-28 18:47:51">2020-04-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/10/29/upload-files/" title="vue + axios 实现文件上传"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue + axios 实现文件上传"/></a><div class="content"><a class="title" href="/2019/10/29/upload-files/" title="vue + axios 实现文件上传">vue + axios 实现文件上传</a><time datetime="2019-10-29T02:52:23.000Z" title="Created 2019-10-29 10:52:23">2019-10-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2019/10/16/vue-component-title/" title="element-admin中动态改变复用组件的title"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="element-admin中动态改变复用组件的title"/></a><div class="content"><a class="title" href="/2019/10/16/vue-component-title/" title="element-admin中动态改变复用组件的title">element-admin中动态改变复用组件的title</a><time datetime="2019-10-16T06:25:15.000Z" title="Created 2019-10-16 14:25:15">2019-10-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By gcchen</div><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备18051422号</a><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div></div></body></html>
