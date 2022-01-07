@@ -1,5 +1,5 @@
 hexo clean
-hexo g
+sudo hexo g
 #cp -rf assets ./public/
 sudo hexo d
 git add .
