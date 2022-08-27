@@ -79,6 +79,6 @@ theme: Butterfly
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://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@github.com/G-c-chen/G-c-chen.github.io
+  repo: https://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@github.com/G-c-chen/G-c-chen.github.io
   branch: master
   message: Site updated {{ now('YYYY-MM-DD HH:mm:ss') }}
